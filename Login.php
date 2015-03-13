@@ -1,8 +1,9 @@
+<?php session_start(); ?>
+
 <!DOCTYPE php>
 <html>
 
-   <?php
-			
+	 <?php		
 		//check if post
 		if($_SERVER["REQUEST_METHOD"] == "POST") 
 		{
@@ -42,9 +43,12 @@
 				//check if user exists 
 				if($result -> num_rows > 0) {
 					echo "Log In Success!!";
+					$_SESSION["username"] = $_POST["username"];
+					echo $_SESSION["username"];
 				}
 				else {
 					echo "Username and Password do not match or can not be found";
+					session_destroy();
 				}
 				
 				$conn -> close();
