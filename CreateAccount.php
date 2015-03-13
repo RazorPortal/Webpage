@@ -45,12 +45,6 @@
 	  <body>
 
 	<?php
-		$InitTable = 'CREATE TABLE UserInfo (';
-		$InitTable .= 'UserName varchar(255),';
-		$InitTable .= 'password varchar(255),';
-		$InitTable .= 'email varchar(255));';
-		
-		
 		$status = "";
 		$username = $password = $email = "";
 
