@@ -53,6 +53,10 @@
 				empty($_POST["password2"]) || empty($_POST["email"])) {
 				echo "Must fill out entire form"; 		
 				}
+		else if($_POST["password"] != $_POST["password2"]) 
+		{
+			echo "Passwords must match";
+		}
 		else {
 			$servername = "localhost"; //uaf59189.ddns.uark.edu
 			

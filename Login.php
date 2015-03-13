@@ -33,17 +33,18 @@
 					echo "ERROR ACCESSING DATABASE\n" . $conn -> error;
 				
 				//build user check script
-				$UserCheck = "SELECT username FROM user;";
-				$UserExist = $conn -> query($UserCheck);
+				$UserCheck = "SELECT * FROM user WHERE username = " . "'" . $_POST["username"] . "'";
+				$UserCheck .= "AND password = " . "'" . $_POST["password"] . "'" . ";";
+				
+				//var_dump($UserCheck);
+				$result = $conn -> query($UserCheck);
 				
 				//check if user exists 
-				if($UserExist -> num_rows > 0) {
-						if($UserExist -> data_seek($_POST["username"]));
-							echo "username exists";
+				if($result -> num_rows > 0) {
+					echo "Log In Success!!";
 				}
-				
 				else {
-					echo "empty column";
+					echo "Username and Password do not match or can not be found";
 				}
 				
 				$conn -> close();
