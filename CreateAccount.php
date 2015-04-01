@@ -60,7 +60,7 @@
 		else {
 			$servername = "localhost"; //uaf59189.ddns.uark.edu
 			
-			$conn = new mysqli($servername, 'root');
+			$conn = new mysqli($servername, 'root', 'tu3xooGh');
 			if($conn -> connect_error) {
 				die("Connection failed: " . $conn -> connect_error);
 			}

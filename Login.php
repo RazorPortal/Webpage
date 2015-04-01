@@ -16,7 +16,7 @@
 				//connect to localhost
 				
 				$servername = "localhost";
-				$conn = new mysqli($servername, 'root');
+				$conn = new mysqli($servername, 'root', 'tu3xooGh');
 				
 				if($conn -> connect_error) {
 					echo "Connection failed: " . $conn -> connect_error;
@@ -44,7 +44,11 @@
 				if($result -> num_rows > 0) {
 					echo "Log In Success!!";
 					$_SESSION["username"] = $_POST["username"];
-					echo $_SESSION["username"];
+					echo $_SESSION["username"]; ?>
+					<script>
+						window.location = 'http://uaf59189.ddns.uark.edu/profile.php';
+					</script>
+					<?php
 				}
 				else {
 					echo "Username and Password do not match or can not be found";
