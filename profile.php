@@ -36,21 +36,30 @@
          background-size: auto;
          background-repeat: no-repeat;
          }
+		 
          ul {
-         font-family: 'Gill Sans';
+		 font-family: 'Gill Sans';
          list-style-type: none;
          margin: 0;
          padding: 0;
          overflow: hidden;
+		 float:center;
+		 
          }
          li {
-         float: left;
+		 display: inline;
+         text-align: center;
+		 float: left;
+		 
+		 
          }
          a {
-         font-family: 'Gill Sans';
+         font-family: 'Arial Black';
          display: block;
          width: 190px;
-         background-color: white;
+         background-color: #990000;
+		 font-color: white;
+		 font-size: large;
          }
          form{	color: white; 
          text-align: center;
@@ -78,7 +87,15 @@
          }
       </style>
    </head>
-   <body>
+   <body link = "white" vlink = "white">
+   
+	 <ul>
+		<li><a href="profile.php">Home</a></li>
+		<li><a href="Schedule.php">Edit Schedule</a></li>
+		<li><a href="Map.asp">Campus Map</a></li>
+		<li><a href="Social.asp">Social Wall</a></li>
+		<li><a href="Rewards.asp">Rewards</a></li>
+	 </ul> 
       <?php
          //Only run if submitting a class
          if($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -140,14 +157,14 @@
             $servername = "localhost"; //uaf59189.ddns.uark.edu
             $conn = new mysqli($servername, 'root', 'tu3xooGh');
             if($conn -> connect_error) {
-            die("Connection failed: " . $conn -> connect_error);
+				die("Connection failed: " . $conn -> connect_error);
             }
             echo "Connected successfully";
             $query = "USE razorportal;";
             if($conn -> query($query) === TRUE)
-            echo "DATABASE ACCESS SUCCESSFUL\n";
+				echo "DATABASE ACCESS SUCCESSFUL\n";
             else
-            echo "ERROR OPENING DATABASE\n" . $conn -> error;
+				echo "ERROR OPENING DATABASE\n" . $conn -> error;
             //Get schedule from RAZORPORTAL sql
             $getSchedule = "SELECT classcode, classname, days, time, building, room FROM schedule WHERE username = \"" . $_SESSION["username"] . "\";";
             $schedule = $conn->query($getSchedule);
@@ -157,14 +174,14 @@
             //echo "ERROR ACCESSING INTO DATABASE\n" . $conn -> error;
             //Iterate over query results until table is finished.
             while ($row = $schedule->fetch_array(MYSQLI_ASSOC)) {
-            echo "<tr>";
-            echo "<td>".$row['classcode']."</td>";
-            echo "<td>".$row['classname']."</td>";
-            echo "<td>".$row['days']."</td>";
-            echo "<td>".$row['time']."</td>";
-            echo "<td>".$row['building']."</td>";
-            echo "<td>".$row['room']."</td>";
-            echo "</tr>";
+				echo "<tr>";
+				echo "<td>".$row['classcode']."</td>";
+				echo "<td>".$row['classname']."</td>";
+				echo "<td>".$row['days']."</td>";
+				echo "<td>".$row['time']."</td>";
+				echo "<td>".$row['building']."</td>";
+				echo "<td>".$row['room']."</td>";
+				echo "</tr>";
             }
             $conn -> close();
             ?>
