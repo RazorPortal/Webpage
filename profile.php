@@ -1,3 +1,5 @@
+
+
 <?php
    session_start();
    ?>
@@ -5,21 +7,32 @@
 <html>
    <head>
       <style>
-         table,td,th {
-         border: 1px solid green;
+         table {
+         border-collapse:collapse;
+         float: center;
+		 font-size: large;
          }
-         th {
-         background-color: green;
+         table,td,th {
+         border: 3px solid white;
          color: white;
          }
+         th {
+         background-color: #990000;
+         color: white;
+         }
+         h1{ 	
+         color: white; 
+         text-align: center;
+         font-size: 700%; 
+         font-family: "Arial Black", Gadget, sans-serif}
          p {
          font-family: 'Gill Sans';
          text-align: center;
-         color: black;
+         color: white;
          }
          body {
          /*background-image: url("http://csce.uark.edu/~ndtaylor/razorback.jpg");*/
-         background-color: white;
+         background-color: #990000;
          background-size: auto;
          background-repeat: no-repeat;
          }
@@ -39,57 +52,81 @@
          width: 190px;
          background-color: white;
          }
+         form{	color: white; 
+         text-align: center;
+         font-size: large;
+         font-family: "Arial Black", Gadget, sans-serif;
+         line-height: 30px}
+         .myButton {
+         background-color:#CC0000;
+         border:1px solid #a4b6ed;
+         display:inline-block;
+         cursor:pointer;
+         color:#ffffff;
+         font-family:arial;
+         font-size:17px;
+         padding:13px 18px;
+         text-decoration:none;
+         text-shadow:0px 1px 0px #2f6627;
+         }
+         .myButton:hover {
+         background-color:#8f0000;
+         }
+         .myButton:active {
+         position:relative;
+         top:1px;
+         }
       </style>
    </head>
    <body>
       <?php
          //Only run if submitting a class
          if($_SERVER["REQUEST_METHOD"] == "POST") {
-         $servername = "localhost"; //uaf59189.ddns.uark.edu
-
+			$servername = "localhost"; //uaf59189.ddns.uark.edu
+         
          //connect to server
          $conn = new mysqli($servername, 'root', 'tu3xooGh');
          if($conn -> connect_error) {
-         die("Connection failed: " . $conn -> connect_error);
+			die("Connection failed: " . $conn -> connect_error);
          }
-         echo "Connected successfully";
-
+			echo "Connected successfully";
+         
          //user Razorportal MYSQL database
          $query = "USE razorportal;";
          if($conn -> query($query) === TRUE)
-         echo "DATABASE ACCESS SUCCESSFUL\n";
-         else
-         echo "ERROR OPENING DATABASE\n" . $conn -> error;
-         if (isset($_POST["addclass"])){
-
-         //Check for empty fields on class submission
-         if(empty($_POST["ccode"]) || empty($_POST["cname"]) ||
-         empty($_POST["days"]) || empty($_POST["time"]) || empty($_POST["building"]) || empty($_POST["room"])) {
-         echo "You must fill out entire form to add a new class";
-         }
-         else{
-         //Insert values to mysql database
-         $insertrow = "INSERT INTO schedule (username, classcode, classname, days, time, building, room)";
-         $insertrow .= " VALUES (" . "'" . $_SESSION["username"] . "'";
-         $insertrow .= " , " . "'" . $_POST["ccode"] . "'";
-         $insertrow .= " , " . "'" . $_POST["cname"] . "'";
-         $insertrow .= " , " . "'" . $_POST["days"] . "'";
-         $insertrow .= " , " . "'" . $_POST["time"] . "'";
-         $insertrow .= " , " . "'" . $_POST["building"] . "'";
-         $insertrow .= " , " . "'" . $_POST["room"] . "'" . ");";
-         var_dump($insertrow);
-         if($conn -> query($insertrow) === TRUE)
-         echo "DATABASE ACCESS SUCCESSFUL\n";
-         else
-         echo "ERROR INSERTING INTO DATABASE\n" . $conn -> error;
-         }
-         $conn -> close();
-         }
-         }
-         //Greeting
-         echo "<p>Hello! Welcome to " . $_SESSION["username"] . "'s profile page!!</p>"
-         ?>
-      <table>
+			echo "DATABASE ACCESS SUCCESSFUL\n";
+		else
+			echo "ERROR OPENING DATABASE\n" . $conn -> error;
+        
+		if (isset($_POST["addclass"])){
+			 //Check for empty fields on class submission
+			 if(empty($_POST["ccode"]) || empty($_POST["cname"]) ||
+				empty($_POST["days"]) || empty($_POST["time"]) || empty($_POST["building"]) || empty($_POST["room"])) {
+				echo "You must fill out entire form to add a new class";
+			 }
+			 else{
+				 //Insert values to mysql database
+				 $insertrow = "INSERT INTO schedule (username, classcode, classname, days, time, building, room)";
+				 $insertrow .= " VALUES (" . "'" . $_SESSION["username"] . "'";
+				 $insertrow .= " , " . "'" . $_POST["ccode"] . "'";
+				 $insertrow .= " , " . "'" . $_POST["cname"] . "'";
+				 $insertrow .= " , " . "'" . $_POST["days"] . "'";
+				 $insertrow .= " , " . "'" . $_POST["time"] . "'";
+				 $insertrow .= " , " . "'" . $_POST["building"] . "'";
+				 $insertrow .= " , " . "'" . $_POST["room"] . "'" . ");";
+				 var_dump($insertrow);
+			 if($conn -> query($insertrow) === TRUE)
+				echo "DATABASE ACCESS SUCCESSFUL\n";
+			 else
+				echo "ERROR INSERTING INTO DATABASE\n" . $conn -> error;
+			 }
+			 $conn -> close();
+		}
+			 }
+			 //Greeting
+			 echo "<h1> " . $_SESSION["username"] . "'s Profile</h1>"
+			 ?>
+      <table align="center">
          <tr>
             <th>Class Code</th>
             <th>Class Name</th>
@@ -133,17 +170,18 @@
             ?>
       </table>
       <br>
-      <form name="editForm" action="profile.php" method="post">
-         Class Code: <input type="text" name="ccode">
-         Class Name: <input type="text" name="cname">
-         Days: <input type="text" name="days">
-         Time: <input type="text" name="time">
-         Building: <input type="text" name="building">
-         Room: <input type="text" name="room"><br>
-         <input type="submit" value="Add Class" name="addclass">
+      <form name="editForm" action="profile.php" method="post" >
+         Class Code: <input type="text" name="ccode"> 
+		 Time: <input type="text" name="time"> 
+         Building: <input type="text" name="building"> <br>
+         Class Name: <input style = "margin-right:10px" type="text" name="cname"> 
+         Days: <input type="text" name="days"> 
+         Room: <input type="text" name="room"><br> <br>
+         <input class="myButton" type="submit" value="Add Class" name="addclass">
       </form>
-	  <form method="link" action="Login.php">
-         <input type="submit" value="Log Out" name="logout">
+      <form method="link" action="Login.php">
+         <input class="myButton" type="submit" value="Log Out" name="logout">
       </form>
    </body>
 </html>
+

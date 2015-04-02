@@ -1,4 +1,6 @@
-<?php session_start(); ?>
+<?php 
+session_destroy();
+session_start(); ?>
 
 <!DOCTYPE php>
 <html>
@@ -61,7 +63,7 @@
 	?>
 	
    <style>
-      body{	background-color: #196CE8}
+      body{	background-color: #990000}
       
       h1{ 	color: white; 
       text-align: center;
@@ -73,8 +75,9 @@
       font-size: large;
       font-family: "Arial Black", Gadget, sans-serif;
       line-height: 15px}
+
       .myButton {
-      background-color:#4b8cdb;
+      background-color:#CC0000;
       border:1px solid #a4b6ed;
       display:inline-block;
       cursor:pointer;
@@ -87,7 +90,7 @@
       }
       
       .myButton:hover {
-      background-color:#184da8;
+      background-color:#8f0000;
       }
       
       .myButton:active {
@@ -103,8 +106,8 @@
    
 	
       <form method = "post">
-         Username: <input style = "margin-left: 50px;" type="text" name="username"> <br>
-         Password: <input style = "margin-left: 58px;" type="password" name="password"> <br>
+         Username: <input style = "margin-left: 50px;" type="text" name="username"> <br> <br>
+         Password: <input style = "margin-left: 55px;" type="password" name="password"> <br> <br>
          <input style="margin-top:15px; margin-left:150px;" class="myButton" type="submit" value="Log In" action = $_SERVER['PHP_SELF']>    
       </form> 
     

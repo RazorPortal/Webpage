@@ -2,7 +2,7 @@
 <html>
    <head>
    <style>
-      body{	background-color: #196CE8}
+      body{	background-color: #990000}
       h1{ 	color: white; 
       text-align: center;
       font-size: 900%; 
@@ -12,8 +12,9 @@
       font-size: large;
       font-family: "Arial Black", Gadget, sans-serif;
       line-height: 15px}
-      .myButton {
-      background-color:#4b8cdb;
+      
+	.myButton {
+      background-color:#CC0000;
       border:1px solid #a4b6ed;
       display:inline-block;
       cursor:pointer;
@@ -24,14 +25,15 @@
       text-decoration:none;
       text-shadow:0px 1px 0px #2f6627;
       }
+      
       .myButton:hover {
-      background-color:#184da8;
+      background-color:#8f0000;
       }
+      
       .myButton:active {
       position:relative;
       top:1px;
-		}
-
+      }
 		.FormStyle input {
 		position: relative;
 		left: 75px;
