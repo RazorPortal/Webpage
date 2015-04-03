@@ -27,23 +27,24 @@
 		<li><a href="Rewards.asp">Rewards</a></li>
 	 </ul> 
       <?php
-         //Only run if submitting a class
-         if($_SERVER["REQUEST_METHOD"] == "POST") {
-			$servername = "localhost"; //uaf59189.ddns.uark.edu
-         
-         //connect to server
+      //connect to server
          $conn = new mysqli($servername, 'root', 'tu3xooGh');
          if($conn -> connect_error) {
-			die("Connection failed: " . $conn -> connect_error);
+         die("Connection failed: " . $conn -> connect_error);
          }
-			echo "Connected successfully";
+         echo "Connected successfully";
          
          //user Razorportal MYSQL database
          $query = "USE razorportal;";
          if($conn -> query($query) === TRUE)
-			echo "DATABASE ACCESS SUCCESSFUL\n";
-		else
-			echo "ERROR OPENING DATABASE\n" . $conn -> error;
+         echo "DATABASE ACCESS SUCCESSFUL\n";
+      else
+         echo "ERROR OPENING DATABASE\n" . $conn -> error;
+
+      //Only run if submitting a class
+      if($_SERVER["REQUEST_METHOD"] == "POST") {
+			$servername = "localhost"; //uaf59189.ddns.uark.edu
+
         
 		if (isset($_POST["addclass"])){
 			 //Check for empty fields on class submission
@@ -67,7 +68,6 @@
 			 else
 				echo "ERROR INSERTING INTO DATABASE\n" . $conn -> error;
 			 }
-			 $conn -> close();
 		}
 			 }
 			 //Greeting
@@ -83,26 +83,11 @@
             <th>Room</th>
          </tr>
          <?php
-            //Connect to SQL database
-            $servername = "localhost"; //uaf59189.ddns.uark.edu
-            $conn = new mysqli($servername, 'root', 'tu3xooGh');
-            if($conn -> connect_error) {
-				die("Connection failed: " . $conn -> connect_error);
-            }
-            echo "Connected successfully";
-            $query = "USE razorportal;";
-            if($conn -> query($query) === TRUE)
-				echo "DATABASE ACCESS SUCCESSFUL\n";
-            else
-				echo "ERROR OPENING DATABASE\n" . $conn -> error;
             //Get schedule from RAZORPORTAL sql
             $getSchedule = "SELECT classcode, classname, days, time, building, room FROM schedule WHERE username = \"" . $_SESSION["username"] . "\";";
             $schedule = $conn->query($getSchedule);
-            //if($schedule === TRUE)
-            // echo "DATABASE ACCESS SUCCESSFUL\n";
-            //else
-            //echo "ERROR ACCESSING INTO DATABASE\n" . $conn -> error;
-            //Iterate over query results until table is finished.
+
+            //populate table with schedule
             while ($row = $schedule->fetch_array(MYSQLI_ASSOC)) {
 				echo "<tr>";
 				echo "<td>".$row['classcode']."</td>";
@@ -113,14 +98,27 @@
 				echo "<td>".$row['room']."</td>";
 				echo "</tr>";
             }
-            $conn -> close();
             ?>
       </table>
       <br>
       <form name="editForm" action="profile.php" method="post" >
          Class Code: <input type="text" name="ccode"> 
 		 Time: <input type="text" name="time"> 
-         Building: <input type="text" name="building"> <br>
+         Building: <select name ="building">
+
+            //populate options with building codes
+            <?php
+               //get building list
+               $getBuildings = "SELECT name FROM buildings;";
+               $buildings = $conn->query($getBuildings);
+
+               //populate dropdown menu with options
+               while ($row2 = $buildings->fetch_array(MYSQLI_ASSOC)){
+                  echo "<option value=\"".$row2['name']."\">".$row2['name']."</option>"
+               }
+            ?>
+
+            </select> <br>
          Class Name: <input style = "margin-right:10px" type="text" name="cname"> 
          Days: <input type="text" name="days"> 
          Room: <input type="text" name="room"><br> <br>
@@ -129,6 +127,10 @@
       <form method="link" action="Login.php">
          <input class="myButton" type="submit" value="Log Out" name="logout">
       </form>
+
+      <?php
+         $conn -> close();
+      ?>
    </body>
 </html>
 
