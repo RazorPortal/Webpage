@@ -4,7 +4,44 @@
 
 <!DOCTYPE php>
 
-<?php session_start(); ?>
+
+<?php 
+	//BEGIN SESSION
+	session_start(); 
+?>
+
+<?php
+	//useful PHP functions
+	
+	function ConnectDB($conn) 
+	{
+		 if($conn -> connect_error) {
+			die("Connection failed: " . $conn -> connect_error);
+		 }
+			echo "Connected successfully";
+		 
+		 //user Razorportal MYSQL database
+		 $query = "USE razorportal;";
+		 if($conn -> query($query) === TRUE)
+			echo "DATABASE ACCESS SUCCESSFUL\n";
+		 else
+			echo "ERROR OPENING DATABASE\n" . $conn -> error;
+	}
+	
+	function QueryCheck($conn, $query) {
+		if($conn -> query($query) === TRUE)
+			echo "DATABASE ACCESS SUCCESSFUL\n";
+	    else
+			echo "ERROR INSERTING INTO DATABASE\n" . $conn -> error;
+	}
+		
+			
+	
+?>
+
+
+
+
 <html>
 	<body  link = "white" vlink = "white">
 
@@ -16,24 +53,13 @@
 		<li><a href="Rewards.asp">Rewards</a></li>
 	 </ul> 
 <?php
-         //Only run if submitting/deleting a class
-         if($_SERVER["REQUEST_METHOD"] == "POST") {
-			$servername = "localhost"; //uaf59189.ddns.uark.edu
-         
-         //connect to server
-         $conn = new mysqli($servername, 'root', 'tu3xooGh');
-         if($conn -> connect_error) {
-			die("Connection failed: " . $conn -> connect_error);
-         }
-			echo "Connected successfully";
-         
-         //user Razorportal MYSQL database
-         $query = "USE razorportal;";
-         if($conn -> query($query) === TRUE)
-			echo "DATABASE ACCESS SUCCESSFUL\n";
-		 else
-			echo "ERROR OPENING DATABASE\n" . $conn -> error;
-        
+	 //Only run if submitting/deleting a class
+	 if($_SERVER["REQUEST_METHOD"] == "POST") {
+	   
+	    //connect to server
+		$conn = new mysqli('localhost', 'root', 'tu3xooGh');
+		connectDB($conn);
+		
 		if (isset($_POST["addclass"])){
 			 //Check for empty fields on class submission
 			 if(empty($_POST["ccode"]) || empty($_POST["cname"]) ||
@@ -51,12 +77,8 @@
 				 $insertrow .= " , " . "'" . $_POST["building"] . "'";
 				 $insertrow .= " , " . "'" . $_POST["room"] . "'" . ");";
 				 var_dump($insertrow);
-			 if($conn -> query($insertrow) === TRUE)
-				echo "DATABASE ACCESS SUCCESSFUL\n";
-			 else
-				echo "ERROR INSERTING INTO DATABASE\n" . $conn -> error;
+			 QueryCheck($conn, $insertrow);
 			 }
-			 $conn -> close();
 		}
 		
 		if(isset($_POST["deleteclass"])) {
@@ -64,16 +86,18 @@
 				echo "You must include a class code to delete a class";
 			}
 			else{
-				$check = "DELETE FROM schedule WHERE classcode = '" . $_POST["DelCcode"] . "';";
-				var_dump($check);
-				if($conn -> query($check) === TRUE)
-					echo "Database access successful";
-				else
-					echo "Database error";
-			}
+				$delete = "DELETE FROM schedule WHERE classcode = '" . $_POST["DelCcode"] . "';";
+				$checkSQL = "SELECT * FROM schedule WHERE classcode = '" . $_POST["DelCcode"] . "';";
 				
+				$check = $conn -> query($checkSQL);
+				if($check -> num_rows > 0) {
+					QueryCheck($conn, $delete);
+				}
+				else
+					echo "Class must exist";
+			}
 		}
-		}
+	}
 	?>
 	
 	
@@ -90,17 +114,9 @@
 		 
 	<?php
             //Connect to SQL database
-            $servername = "localhost"; //uaf59189.ddns.uark.edu
-            $conn = new mysqli($servername, 'root', 'tu3xooGh');
-            if($conn -> connect_error) {
-				die("Connection failed: " . $conn -> connect_error);
-            }
-            echo "Connected successfully";
-            $query = "USE razorportal;";
-            if($conn -> query($query) === TRUE)
-				echo "DATABASE ACCESS SUCCESSFUL\n";
-            else
-				echo "ERROR OPENING DATABASE\n" . $conn -> error;
+			$conn = new mysqli('localhost', 'root', 'tu3xooGh');
+            ConnectDB($conn);
+			
             //Get schedule from RAZORPORTAL sql
             $getSchedule = "SELECT classcode, classname, days, time, building, room FROM schedule WHERE username = \"" . $_SESSION["username"] . "\";";
             $schedule = $conn->query($getSchedule);
@@ -121,16 +137,27 @@
 				
             }
 			
-            $conn -> close();
             ?>
 	</table>
+	
 	<form name="editForm" action="Schedule.php" method="post" >
 		 <br>
          Class Code: <input type="text" name="ccode"> 
 		 Time: <input type="text" name="time"> 
-         Building: <input type="text" name="building"> <br>
-         Class Name: <input style = "margin-right:10px" type="text" name="cname"> 
-         Days: <input type="text" name="days"> 
+         Building: <select name="building">
+	 	
+		<?php
+			//Get buildinglist
+			$getBuildings = "SELECT name FROM buildings;";
+			$buildings = $conn->query($getBuildings);
+			while ($row2 = $buildings->fetch_array(MYSQLI_ASSOC)){
+				echo "<option>".$row2['name']."</option>";
+			}
+		?>
+
+		</select> <br> 
+         Class Name: <input type="text" name="cname"> 
+         Days: <input type="text"  name="days"> 
          Room: <input type="text" name="room"><br> <br>
          <input class="myButton" type="submit" value="Add Class" name="addclass">
       </form>
@@ -140,6 +167,10 @@
 		Class Code: <input type="text" name="DelCcode"> 
 		<input class="myButton" name = "deleteclass" type="submit" value="Delete Class">
 	</form>
+	
+	<?php
+		$conn->close();	
+	?>
 	
 	</body>
    </html>
