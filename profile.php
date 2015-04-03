@@ -23,7 +23,7 @@
 		<li><a href="profile.php">Home</a></li>
 		<li><a href="Schedule.php">Edit Schedule</a></li>
 		<li><a href="Map.asp">Campus Map</a></li>
-		<li><a href="Social.asp">Social Wall</a></li>
+		<li><a href="Social.php">Social Wall</a></li>
 		<li><a href="Rewards.asp">Rewards</a></li>
 	 </ul> 
       <?php
@@ -43,7 +43,6 @@
 			echo "DATABASE ACCESS SUCCESSFUL\n";
 		else
 			echo "ERROR OPENING DATABASE\n" . $conn -> error;
-
 	if($_SERVER["REQUEST_METHOD"] == "POST") {        
 		if (isset($_POST["addclass"])){
 			 //Check for empty fields on class submission
@@ -126,4 +125,3 @@
 	$conn->close();	
 ?>
 </html>
-
