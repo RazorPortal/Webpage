@@ -12,7 +12,7 @@
 		<li><a href="profile.php">Home</a></li>
 		<li><a href="Schedule.php">Edit Schedule</a></li>
 		<li><a href="Map.asp">Campus Map</a></li>
-		<li><a href="Social.asp">Social Wall</a></li>
+		<li><a href="Social.php">Social Wall</a></li>
 		<li><a href="Rewards.asp">Rewards</a></li>
 	 </ul> 
 <?php
@@ -127,22 +127,10 @@
 	<form name="editForm" action="Schedule.php" method="post" >
 		 <br>
 		 Post a status: <input type="text" name="status">
-         <!--
-		 Class Code: <input type="text" name="ccode"> 
-		 Time: <input type="text" name="time"> 
-         Building: <input type="text" name="building"> <br>
-         Class Name: <input style = "margin-right:10px" type="text" name="cname"> 
-         Days: <input type="text" name="days"> 
-         Room: <input type="text" name="room"><br> <br>
-		 -->
-         <input class="myButton" type="submit" value="Add Class" name="addclass">
+
+         <input class="myButton" type="submit" value="Submit" name="addclass">
       </form>
 	  
-	<form name="delete" action="Schedule.php" method="post">
-		<br>
-		Class Code: <input type="text" name="DelCcode"> 
-		<input class="myButton" name = "deleteclass" type="submit" value="Delete Class">
-	</form>
 	
 	</body>
    </html>
