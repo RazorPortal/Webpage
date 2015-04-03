@@ -34,22 +34,17 @@
 		 else
 			echo "ERROR OPENING DATABASE\n" . $conn -> error;
         
-		if (isset($_POST["addclass"])){
+		if (isset($_POST["wallsubmit"])){
 			 //Check for empty fields on class submission
-			 if(empty($_POST["ccode"]) || empty($_POST["cname"]) ||
-				empty($_POST["days"]) || empty($_POST["time"]) || empty($_POST["building"]) || empty($_POST["room"])) {
+			 if(empty($_POST["status"])) {
 				echo "You must fill out entire form to add a new class";
 			 }
 			 else{
 				 //Insert values to mysql database
-				 $insertrow = "INSERT INTO schedule (username, classcode, classname, days, time, building, room)";
+				 $insertrow = "INSERT INTO wall (user, status)";
 				 $insertrow .= " VALUES (" . "'" . $_SESSION["username"] . "'";
-				 $insertrow .= " , " . "'" . $_POST["ccode"] . "'";
-				 $insertrow .= " , " . "'" . $_POST["cname"] . "'";
-				 $insertrow .= " , " . "'" . $_POST["days"] . "'";
-				 $insertrow .= " , " . "'" . $_POST["time"] . "'";
-				 $insertrow .= " , " . "'" . $_POST["building"] . "'";
-				 $insertrow .= " , " . "'" . $_POST["room"] . "'" . ");";
+				 $insertrow .= " , " . "'" . $_POST["status"] . "'";
+				
 				 var_dump($insertrow);
 			 if($conn -> query($insertrow) === TRUE)
 				echo "DATABASE ACCESS SUCCESSFUL\n";
@@ -59,11 +54,12 @@
 			 $conn -> close();
 		}
 		
-		if(isset($_POST["deleteclass"])) {
-			if(empty($_POST["DelCcode"])) {
-				echo "You must include a class code to delete a class";
+		if(isset($_POST["Submit"])) {
+			if(empty($_POST["wallsubmit"])) {
+				echo "Your post is empty, by the way";
 			}
-			else{
+			else
+			{
 				$check = "DELETE FROM schedule WHERE classcode = '" . $_POST["DelCcode"] . "';";
 				var_dump($check);
 				if($conn -> query($check) === TRUE)
@@ -76,16 +72,6 @@
 		}
 	?>
 	
-	
-	<table align="center">
-         <tr>
-            <th>Class Code</th>
-            <th>Class Name</th>
-            <th>Days</th>
-            <th>Time</th>
-            <th>Building</th>
-            <th>Room</th>
-         </tr> 
 		 
 		 
 	<?php
@@ -128,7 +114,7 @@
 		 <br>
 		 Post a status: <input type="text" name="status">
 
-         <input class="myButton" type="submit" value="Submit" name="addclass">
+         <input class="myButton" type="submit" value="Submit" name="wallsubmit">
       </form>
 	  
 	
