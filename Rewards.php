@@ -4,19 +4,11 @@
 
 <!DOCTYPE php>
 <?php
-	//connect to server
-     $conn = new mysqli('localhost', 'root', 'tu3xooGh');
-     if($conn -> connect_error) {
-		die("Connection failed: " . $conn -> connect_error);
-     }
-	echo "Connected successfully";
-     
-     //user Razorportal MYSQL database
-     $query = "USE razorportal;";
-    if($conn -> query($query) === TRUE)
-		echo "DATABASE ACCESS SUCCESSFUL\n";
-	else
-		echo "ERROR OPENING DATABASE\n" . $conn -> error;
+	include 'database.class.php';
+	
+	//Connect to razorportal database
+	$database = new Database();
+	$conn = $database->connect();
 ?>
 <html>
 	<body  link = "white" vlink = "white">
