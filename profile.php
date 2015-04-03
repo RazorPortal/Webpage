@@ -1,4 +1,6 @@
-
+<style type="text/css">
+	@import url('MainStyle.css');
+</style>
 
 <?php
    session_start();
@@ -7,87 +9,15 @@
 <html>
    <head>
       <style>
-         table {
-         border-collapse:collapse;
-         float: center;
-		 font-size: large;
-         }
-         table,td,th {
-         border: 3px solid white;
-         color: white;
-         }
-         th {
-         background-color: #990000;
-         color: white;
-         }
          h1{ 	
          color: white; 
          text-align: center;
          font-size: 700%; 
          font-family: "Arial Black", Gadget, sans-serif}
-         p {
-         font-family: 'Gill Sans';
-         text-align: center;
-         color: white;
-         }
-         body {
-         /*background-image: url("http://csce.uark.edu/~ndtaylor/razorback.jpg");*/
-         background-color: #990000;
-         background-size: auto;
-         background-repeat: no-repeat;
-         }
-		 
-         ul {
-		 font-family: 'Gill Sans';
-         list-style-type: none;
-         margin: 0;
-         padding: 0;
-         overflow: hidden;
-		 float:center;
-		 
-         }
-         li {
-		 display: inline;
-         text-align: center;
-		 float: left;
-		 
-		 
-         }
-         a {
-         font-family: 'Arial Black';
-         display: block;
-         width: 190px;
-         background-color: #990000;
-		 font-color: white;
-		 font-size: large;
-         }
-         form{	color: white; 
-         text-align: center;
-         font-size: large;
-         font-family: "Arial Black", Gadget, sans-serif;
-         line-height: 30px}
-         .myButton {
-         background-color:#CC0000;
-         border:1px solid #a4b6ed;
-         display:inline-block;
-         cursor:pointer;
-         color:#ffffff;
-         font-family:arial;
-         font-size:17px;
-         padding:13px 18px;
-         text-decoration:none;
-         text-shadow:0px 1px 0px #2f6627;
-         }
-         .myButton:hover {
-         background-color:#8f0000;
-         }
-         .myButton:active {
-         position:relative;
-         top:1px;
          }
       </style>
    </head>
-   <body link = "white" vlink = "white">
+   <body   link = "white" vlink = "white">
    
 	 <ul>
 		<li><a href="profile.php">Home</a></li>

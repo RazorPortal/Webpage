@@ -1,50 +1,22 @@
+<style type="text/css">
+	@import url('MainStyle.css');
+</style>
+
 <!DOCTYPE php>
+
 <html>
    <head>
    <style>
-      body{	background-color: #990000}
-      h1{ 	color: white; 
+	  h1{ 	color: white; 
       text-align: center;
-      font-size: 900%; 
-      font-family: "Arial Black", Gadget, sans-serif}
-      form{	color: white; 
-      text-align: center;
-      font-size: large;
-      font-family: "Arial Black", Gadget, sans-serif;
-      line-height: 15px}
-      
-	.myButton {
-      background-color:#CC0000;
-      border:1px solid #a4b6ed;
-      display:inline-block;
-      cursor:pointer;
-      color:#ffffff;
-      font-family:arial;
-      font-size:17px;
-      padding:13px 18px;
-      text-decoration:none;
-      text-shadow:0px 1px 0px #2f6627;
-      }
-      
-      .myButton:hover {
-      background-color:#8f0000;
-      }
-      
-      .myButton:active {
-      position:relative;
-      top:1px;
-      }
-		.FormStyle input {
-		position: relative;
-		left: 75px;
-		line-height: 24px;
-		top: 0px;
-		}
-			
+      font-size: 500%; 
+      font-family: "Arial Black", Gadget, sans-serif
+	  }			
    </style>
    </head>
 
-	  <body>
+   <body>
+   <h1> Create Account </h1>
 
 	<?php
 		$status = "";
@@ -103,7 +75,7 @@
 	}
 	?>
 
-     	<form class = "FormStyle" method="POST">
+     	<form class = "FormStyle" method="POST" >
          Username: <input style="margin-left:23px;" type="text" name="username"> <br>
          UARK E-mail: <input type="text" name="email"> <br>
          Password: <input style="margin-left:30px;" type="password" name="password"> <br>

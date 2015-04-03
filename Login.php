@@ -1,3 +1,7 @@
+<style type="text/css">
+	@import url('MainStyle.css');
+</style>
+
 <?php 
 session_destroy();
 session_start(); ?>
@@ -63,41 +67,10 @@ session_start(); ?>
 	?>
 	
    <style>
-      body{	background-color: #990000}
-      
       h1{ 	color: white; 
       text-align: center;
       font-size: 900%; 
       font-family: "Arial Black", Gadget, sans-serif}
-     
-	  form{	color: white; 
-      text-align: center;
-      font-size: large;
-      font-family: "Arial Black", Gadget, sans-serif;
-      line-height: 15px}
-
-      .myButton {
-      background-color:#CC0000;
-      border:1px solid #a4b6ed;
-      display:inline-block;
-      cursor:pointer;
-      color:#ffffff;
-      font-family:arial;
-      font-size:17px;
-      padding:13px 18px;
-      text-decoration:none;
-      text-shadow:0px 1px 0px #2f6627;
-      }
-      
-      .myButton:hover {
-      background-color:#8f0000;
-      }
-      
-      .myButton:active {
-      position:relative;
-      top:1px;
-      }
-
    </style>
    <head>
       <title> RazorPortal </title>
