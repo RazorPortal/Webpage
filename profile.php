@@ -99,6 +99,11 @@
          ?>
       </table>
       <br>
+	  
+	   <form method="link" action="Login.php">
+	    	<input style="margin-top:15px; margin-left:150px;" class="myButton" type="submit"  value="Log Out">
+      </form>
+	  
    </body>
 <?php
 	$conn->close();	
