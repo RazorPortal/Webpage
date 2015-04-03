@@ -16,7 +16,7 @@
 		<li><a href="Rewards.asp">Rewards</a></li>
 	 </ul> 
 <?php
-         //Only run if submitting a class
+         //Only run if submitting/deleting a class
          if($_SERVER["REQUEST_METHOD"] == "POST") {
 			$servername = "localhost"; //uaf59189.ddns.uark.edu
          
@@ -31,7 +31,7 @@
          $query = "USE razorportal;";
          if($conn -> query($query) === TRUE)
 			echo "DATABASE ACCESS SUCCESSFUL\n";
-		else
+		 else
 			echo "ERROR OPENING DATABASE\n" . $conn -> error;
         
 		if (isset($_POST["addclass"])){
@@ -58,8 +58,25 @@
 			 }
 			 $conn -> close();
 		}
+		
+		if(isset($_POST["deleteclass"])) {
+			if(empty($_POST["DelCcode"])) {
+				echo "You must include a class code to delete a class";
+			}
+			else{
+				$check = "DELETE FROM schedule WHERE classcode = '" . $_POST["DelCcode"] . "';";
+				var_dump($check);
+				if($conn -> query($check) === TRUE)
+					echo "Database access successful";
+				else
+					echo "Database error";
+			}
+				
+		}
 		}
 	?>
+	
+	
 	<table align="center">
          <tr>
             <th>Class Code</th>
@@ -101,12 +118,13 @@
 				echo "<td>".$row['building']."</td>";
 				echo "<td>".$row['room']."</td>";
 				echo "</tr>";
-				echo "<button> Delete </button>";
+				
             }
+			
             $conn -> close();
             ?>
 	</table>
-	<form name="editForm" action="profile.php" method="post" >
+	<form name="editForm" action="Schedule.php" method="post" >
 		 <br>
          Class Code: <input type="text" name="ccode"> 
 		 Time: <input type="text" name="time"> 
@@ -116,5 +134,12 @@
          Room: <input type="text" name="room"><br> <br>
          <input class="myButton" type="submit" value="Add Class" name="addclass">
       </form>
+	  
+	<form name="delete" action="Schedule.php" method="post">
+		<br>
+		Class Code: <input type="text" name="DelCcode"> 
+		<input class="myButton" name = "deleteclass" type="submit" value="Delete Class">
+	</form>
+	
 	</body>
    </html>
