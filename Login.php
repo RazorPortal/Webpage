@@ -1,14 +1,18 @@
-<style type="text/css">
-	@import url('MainStyle.css');
-</style>
+<!DOCTYPE html>
 
 <?php 
 session_destroy();
 session_start(); ?>
 
-<!DOCTYPE php>
 <html>
-
+	<head>
+		<!-- Latest compiled and minified CSS -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+		<!-- Latest compiled and minified JavaScript -->
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+		<title>RazorPortal</title>
+	</head>
+	
 	 <?php		
 		//check if post
 		if($_SERVER["REQUEST_METHOD"] == "POST") 
@@ -66,29 +70,38 @@ session_start(); ?>
 	    }
 	?>
 	
-   <style>
-      h1{ 	color: white; 
-      text-align: center;
-      font-size: 900%; 
-      font-family: "Arial Black", Gadget, sans-serif}
-   </style>
-   <head>
-      <title> RazorPortal </title>
-      <h1> RazorPortal </h1>
-   <body>
-   
-	
-      <form method = "post">
-         Username: <input style = "margin-left: 50px;" type="text" name="username"> <br> <br>
-         Password: <input style = "margin-left: 55px;" type="password" name="password"> <br> <br>
-         <input style="margin-top:15px; margin-left:150px;" class="myButton" type="submit" value="Log In" action = $_SERVER['PHP_SELF']>    
-      </form> 
-    
-  	  <form method="link" action="CreateAccount.php">
-	    	<input style="margin-top:15px; margin-left:150px;" class="myButton" type="submit"  value="Create Account">
-      </form>
-   </body>
-   </head>
+	<body>  
+		<div class="container-fluid">
+			<h1 class="text-center" style="font-size:150px"> RazorPortal </h1> <br><br>
+				<form class="form-horizontal" method = "post">
+				
+					
+					<div class="form-group">
+						<label for="username" class="col-sm-offset-4 col-sm-1">Username:</label>
+						<div class="col-sm-2">
+							<input type="text" class="form-control" id="username" name="username" placeholder="Enter Username">
+						</div>
+					</div>
+				
+					
+					<div class="form-group">
+						<label for="password" class="col-sm-offset-4 col-sm-1">Password:</label>
+						<div class="col-sm-2">
+							<input type="password" class="form-control" id="password" name="password" placeholder="Password">
+						</div>
+					</div>
+					
+					<div class="text-center">
+						<button type="submit" class="btn btn-default">Submit</button><br><br>
+				  </div>
+					
+				</form> 
+				<form method="link" action="CreateAccount.php">
+					<div class="text-center">
+						<button type="submit" class="btn btn-default">Create Account</button>
+					</div>
+				</form>
+				
+		</div>
+  </body>
 </html>
-
-
