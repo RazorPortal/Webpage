@@ -56,6 +56,9 @@
 					 $insertrow .= " VALUES (" . "'" . $_SESSION["username"] . "'";
 					 $insertrow .= " , " . "'" . $_POST["status"] . "'" . ");";
 					 var_dump($insertrow);
+
+					 $addpoint = "UPDATE user SET points=points+1 WHERE username='" . $_SESSION["username"] . "';";
+					 $conn -> query($addpoint);
 				 
 				 if($conn -> query($insertrow) === TRUE)
 					echo "DATABASE ACCESS SUCCESSFUL\n";

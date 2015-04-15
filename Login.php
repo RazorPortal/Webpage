@@ -54,7 +54,13 @@ session_start(); ?>
 				if($result -> num_rows > 0) {
 					echo "Log In Success!!";
 					$_SESSION["username"] = $_POST["username"];
-					echo $_SESSION["username"]; ?>
+					echo $_SESSION["username"]; 
+
+					$addpoint = "UPDATE user SET points=points+1 WHERE username='" . $_POST["username"] . "';";
+					$conn -> query($addpoint);
+
+					?>
+
 					<script>
 						window.location = 'http://uaf59189.ddns.uark.edu/profile.php';
 					</script>

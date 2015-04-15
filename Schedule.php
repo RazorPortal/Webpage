@@ -82,6 +82,10 @@
 					 $insertrow .= " , " . "'" . $_POST["building"] . "'";
 					 $insertrow .= " , " . "'" . $_POST["room"] . "'" . ");";
 					 var_dump($insertrow);
+
+					$addpoint = "UPDATE user SET points=points+1 WHERE username='" . $_SESSION["username"] . "';";
+					$conn -> query($addpoint);
+					
 				 QueryCheck($conn, $insertrow);
 				 }
 			}
