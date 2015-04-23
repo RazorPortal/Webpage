@@ -27,21 +27,11 @@ session_start(); ?>
 				
 				$servername = "localhost";
 				$conn = new mysqli($servername, 'root', 'tu3xooGh');
-				
-				if($conn -> connect_error) {
-					echo "Connection failed: " . $conn -> connect_error;
-				}
-				else {
-					echo "Connected successfully";
-				}
 			
 				//open razorportal database
 				$openDB = "USE razorportal;";
 			
-				if($conn -> query($openDB) === TRUE)
-					echo "DATABASE ACCESS SUCCESSFUL\n";
-				else
-					echo "ERROR ACCESSING DATABASE\n" . $conn -> error;
+				$conn -> query($openDB);
 				
 				//build user check script
 				$UserCheck = "SELECT * FROM user WHERE username = " . "'" . $_POST["username"] . "'";
@@ -52,9 +42,7 @@ session_start(); ?>
 				
 				//check if user exists 
 				if($result -> num_rows > 0) {
-					echo "Log In Success!!";
 					$_SESSION["username"] = $_POST["username"];
-					echo $_SESSION["username"]; 
 
 					$addpoint = "UPDATE user SET points=points+1 WHERE username='" . $_POST["username"] . "';";
 					$conn -> query($addpoint);

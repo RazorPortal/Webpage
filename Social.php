@@ -36,14 +36,10 @@
 					 if($conn -> connect_error) {
 						die("Connection failed: " . $conn -> connect_error);
 					 }
-					 echo "Connected successfully";
 					 
 					 //user Razorportal MYSQL database
 					 $query = "USE razorportal;";
-					 if($conn -> query($query) === TRUE)
-						echo "DATABASE ACCESS SUCCESSFUL\n";
-					else
-						echo "ERROR OPENING DATABASE\n" . $conn -> error;
+					 $conn -> query($query);
 					
 			if (isset($_POST["wallsubmit"])){
 				 //Check for empty fields on class submission
@@ -59,11 +55,7 @@
 
 					 $addpoint = "UPDATE user SET points=points+1 WHERE username='" . $_SESSION["username"] . "';";
 					 $conn -> query($addpoint);
-				 
-				 if($conn -> query($insertrow) === TRUE)
-					echo "DATABASE ACCESS SUCCESSFUL\n";
-				 else
-					echo "ERROR INSERTING INTO DATABASE\n" . $conn -> error;
+				 	 $conn -> query($insertrow);
 				 }
 				 $conn -> close();
 			}
@@ -92,12 +84,8 @@
 						die("Connection failed: " . $conn->connect_error);
 				}
 				
-				echo "Connected successfully";
 				$query = "USE razorportal;";
-				if ($conn->query($query) === TRUE)
-						echo "DATABASE ACCESS SUCCESSFUL\n";
-				else
-						echo "ERROR OPENING DATABASE\n" . $conn->error;
+				$conn->query($query);
 				
 				//Get schedule from RAZORPORTAL sql
 				$getWall     = "SELECT user, status FROM wall";

@@ -21,20 +21,14 @@
 			 if($conn -> connect_error) {
 				die("Connection failed: " . $conn -> connect_error);
 			 }
-				echo "Connected successfully";
 			 
 			 //user Razorportal MYSQL database
 			 $query = "USE razorportal;";
-			 if($conn -> query($query) === TRUE)
-				echo "DATABASE ACCESS SUCCESSFUL\n";
-			 else
-				echo "ERROR OPENING DATABASE\n" . $conn -> error;
+			 $conn -> query($query);
 		}
 		
 		function QueryCheck($conn, $query) {
-			if($conn -> query($query) === TRUE)
-				echo "DATABASE ACCESS SUCCESSFUL\n";
-				else
+			if($conn -> query($query) === FALSE)
 				echo "ERROR INSERTING INTO DATABASE\n" . $conn -> error;
 		}		
 	?>

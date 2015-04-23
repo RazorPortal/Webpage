@@ -10,8 +10,7 @@ class Database{
 
 		//use Razorportal MYSQL database
 		$query = "USE razorportal;";
-		if($conn -> query($query) !== TRUE)
-			echo "ERROR OPENING DATABASE\n" . $conn -> error;
+		$conn -> query($query);
 		
 		return $conn;
 	}

@@ -32,15 +32,10 @@
 				if($conn -> connect_error) {
 					die("Connection failed: " . $conn -> connect_error);
 				}
-					
-				echo "Connected successfully";
 				
 				$query = "USE razorportal;";
 				
-				if($conn -> query($query) === TRUE)
-					echo "DATABASE ACCESS SUCCESSFUL\n";
-				else
-					echo "ERROR CREATING DATABASE\n" . $conn -> error;
+				$conn -> query($query);
 				
 				$UserCheck = "SELECT username FROM user WHERE username = " . "'" . $_POST["username"] . "' " . ";";
 				var_dump($UserCheck);
@@ -53,13 +48,9 @@
 				else {
 					$query2 = "INSERT INTO user (username, password)";
 					$query2 .= " VALUES (" . "'" . $_POST["username"] . "'";
-					$query2 .= " , " . "'" . $_POST["password"] . "'" . ");";
+					$query2 .= " , " . "'" . $_POST["password"] . "'" . ",0);";
 					
-					if($conn -> query($query2) === TRUE)
-						echo "DATABASE ACCESS SUCCESSFUL\n";
-					else
-						echo "ERROR CREATING DATABASE\n" . $conn -> error;
-				
+					$conn -> query($query2);
 				}
 				
 				$conn -> close();
