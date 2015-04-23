@@ -1,1 +1,0 @@
-<!DOCTYPE php>
