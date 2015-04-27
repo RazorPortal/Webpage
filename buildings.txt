@@ -1,0 +1,22 @@
+Building Code	Name	Latitude	Longitude
+MULN	Mullins Library	36.068697	-94.173770
+UNST	Student Union	36.068795	-94.175894
+JBHT	J.B. Hunt	36.066061	-94.173780
+BELL	Bell Engineering	36.067069	-94.171361
+SCEN	Science Engineering	36.067002	-94.172375
+HILL	Hillside Auditorium	36.066922	-94.173046
+KIMP	Kimpel Hall	36.066131	-94.174333
+WCOB	Business Building	36.065218	-94.174258
+HAPG	Harmon Parking Garage	36.065107	-94.171705
+MAIN	Old Main	36.068700	-94.171630
+CHEM	Chemistry Building		36.068006	-94.172950
+MEEG	Mechanical Engineering	36.066360	-94.172918
+WJWH	Willard J. Walker Hall	36.065313	-94.173417
+MEMH	Memorial Hall	36.069807	-94.171502
+RSEA	David Reynolds Stadium	36.068168	-94.178946
+AGRI	Agriculture Building	36.070917	-94.176972
+BKST	University Bookstore	36.072075	-94.175180
+MHSR	Maple Hill	36.072777	-94.178045
+GAPG	Garland Parking Garage	36.072864	-94.174805
+GRAD	Graduate Building	36.067754	-94.171184
+BWAR	Bud Walton Arena	36.061542	-94.178131
