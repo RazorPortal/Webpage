@@ -75,7 +75,6 @@
 					 $insertrow .= " , " . "'" . $_POST["time"] . "'";
 					 $insertrow .= " , " . "'" . $_POST["building"] . "'";
 					 $insertrow .= " , " . "'" . $_POST["room"] . "'" . ");";
-					 var_dump($insertrow);
 
 					$addpoint = "UPDATE user SET points=points+1 WHERE username='" . $_SESSION["username"] . "';";
 					$conn -> query($addpoint);
@@ -89,7 +88,8 @@
 					echo "You must include a class code to delete a class";
 				}
 				else{
-					$delete = "DELETE FROM schedule WHERE classcode = '" . $_POST["DelCcode"] . "';";
+					$delete = "DELETE FROM schedule WHERE classcode = '" . $_POST["DelCcode"] . "'";
+                    $delete .= "AND username = '" . $_SESSION["username"]. "';";
 					$checkSQL = "SELECT * FROM schedule WHERE classcode = '" . $_POST["DelCcode"] . "';";
 					
 					$check = $conn -> query($checkSQL);
